@@ -1,18 +1,3 @@
-<?php 
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-require_once(__DIR__ . '/application/config/config.php');
-
-
-// Check if the function exists
-if (!function_exists('base_url')) {
-    die("Error: base_url() function is not defined. Check config.php.");
-}
-
-// Print base_url for debugging
-echo "Base URL: " . base_url();
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -292,460 +277,360 @@ echo "Base URL: " . base_url();
   margin:10px 0 0 -5px;
 }
 </style>
-<style>
-    body { 
-            font-family: 'Roboto', sans-serif; /* Updated font family */ 
-            margin: 0; 
-            padding: 0;
-            background-color: #ffffff;
-            color: #333;
-            text-align: center;
-        }
-		
-		/* Banner Styles */
-.success-stories-banner {
-    position: relative;
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
-}
-
-.banner-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.banner-content {
-    position: absolute;
-    top: 20%;  /* Adjusted for better placement */
-    left: 54%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: #FF6347; /* Changed to gold for better contrast */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Added shadow for better readability */
-    border-radius: 10px;
-    max-width: 60%;
-}
-
-.banner-content h1 {
-    margin: 0;
-    font-size: 2.5em; /* Kept size balanced */
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #D43D3D; /* Ensuring header is gold */
-}
-
-.banner-content p {
-    margin: 8px 0 0;
-    font-size: 1.2em;
-    color: #FFFFFF; /* White for better readability */
-}
-
-
-		
-        /* Navigation Bar Styles */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f8f9fa;
-            padding: 10px 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .navbar a {
-            text-decoration: none;
-            color: #333;
-            margin: 0 15px;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .navbar a:hover {
-            color: #d61a3c;
-        }
-
-        .navbar .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #d61a3c;
-        }
-
-        .container { 
-            max-width: 1000px; 
-            margin: auto; 
-            padding: 20px;
-        }
-        
-       /* Company Icons Wrapper */
-.company-icons-wrapper {
-    width: 100%;
-    margin-top: 10px;
-    display: flex; /* Show by default */
-    align-items: center;
-    justify-content: flex-start; /* Moves icons to the left */
-    position: relative;
-}
-
-/* Scrollable Carousel */
-.carousel-container {
-    width: 650px; /* 6 icons x 70px */
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    justify-content: flex-start; /* Aligns icons to the left */
-    margin-left: 100px;  /* Moves entire carousel slightly right */
-    align-items: center;
-}
-
-/* Company Icons */
-.company-icons {
-    display: flex;
-    justify-content: flex-start; /* Align icons to the left */
-    transition: transform 0.5s ease-in-out;
-    margin-left: 100px; /* Moves icons to the right */
-}
-
-/* Individual Company Icon */
-.company-icon {
-    width: 100px;
-    height: 70px;
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
-    margin: 20px;
-}
-
-        .company-icon:hover {
-            filter: grayscale(0%);
-        }
-
-        /* Slider Buttons */
-        .slider-btn {
-            background: rgba(255, 255, 255, 0.3); /* Semi-transparent glass effect */
-            color: #333;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            padding: 15px;
-            font-size: 22px;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            border-radius: 50%;
-            backdrop-filter: blur(10px); /* Glass effect */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease-in-out;
-            width: 55px;
-            height: 55px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Hover Effect */
-        .slider-btn:hover {
-            background: linear-gradient(45deg, #ff416c, #ff4b2b);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 16px rgba(255, 75, 43, 0.5);
-            transform: translateY(-50%) scale(1.15) rotate(5deg); /* Slight rotation for a unique touch */
-        }
-
-       /* Position Left Button to Far Left */
-.left-btn { 
-    position: absolute;
-    left: 0;
-}
-
-/* Position Right Button to Far Right */
-.right-btn { 
-    position: absolute;
-    right: 0;
-}
-
-/* Add a subtle pulse animation when hovering */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px rgba(255, 75, 43, 0.4); }
-            50% { box-shadow: 0 0 20px rgba(255, 75, 43, 0.6); }
-            100% { box-shadow: 0 0 10px rgba(255, 75, 43, 0.4); }
-        }
-
-        .slider-btn:hover {
-            animation: pulse 1.5s infinite;
-        }
-
-/* Show All Button Positioned at Right */
-.show-all-container {
-    display: flex;
-    justify-content: flex-end; /* Aligns button to the right */
-    margin-top: 20px;
-    width: 100%;
-}
-
-#showAllBtn {
-    font-size: 16px;
-    padding: 12px 24px;
-    background: linear-gradient(135deg, #D43D3D, #D32F2F); /* Matching red gradient */
-    color: white;
-    border-radius: 50px; /* Rounded button */
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 15px rgba(212, 61, 61, 0.6); /* Subtle glow */
-    outline: none;
-    display: inline-block;
-}
-
-/* Hover Effect */
-#showAllBtn:hover {
-    background: linear-gradient(135deg, #D32F2F, #D43D3D); /* Reverse gradient for effect */
-    box-shadow: 0 0 25px rgba(212, 61, 61, 0.9); /* Slightly stronger glow */
-    transform: scale(1.05); /* Slight pop effect */
-}
-
-
-
-
-
-/* Active (click) effect */
-#showAllBtn:active {
-    transform: scale(0.98); /* Pressed effect */
-    box-shadow: 0 0 10px rgba(255, 71, 91, 0.5);
-}
-	.image-container img {
-        border: 2px solid black; /* Black boundary */
-        margin-bottom: 20px; /* Space between images */
-    }
-    .image-container img:not(:last-child) {
-        margin-right: 30px; /* Space between side-by-side images */
-    }
-
-
-        .projects { 
-            display: block; /* Show by default */
-            text-align: left;
-            margin-top: 10px;
-        }
-        .project-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    margin: 10px auto;
-    max-width: 1300px;
-    position: relative;
-    border-bottom: 2px solid #ccc; /* Add a bottom border */
-    padding-bottom: 15px; /* Add space before the border */
-}
-	
-    .project-content p {
-        font-size: 18px; /* Adjust the size as needed */
-        line-height: 1.6; /* Improves readability */
-        }
-		
-	.project-content li {
-        font-size: 18px; /* Adjust the size as needed */
-        line-height: 1.6; /* Improves readability */
-        }
-        .project-content {
-            flex-grow: 1;
-        }
-        .project-title {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .date { 
-            font-size: 14px; 
-            color: #666;
-            margin-top: 5px;
-        }
-
-        /* Right-aligned icons in project items */
-        .project-icon {
-            width: 80px;
-            height: 50px;
-            margin-left: 15px;
-            align-self: flex-start; /* Align flag to the top */
-        }
-		.project-title b {
-    font-size: 28px; /* Adjust the size as needed */
-	
-}
-    </style>
-</head>
-<body>
-     <div class="success-stories-banner">
-        <img src="assets/images/slides/sucs.webp" alt="Success Stories" class="banner-image">
-        <div class="banner-content">
-            <h1>SUCCESS STORIES</h1>
-            <p>Discover inspiring stories of how our solutions have transformed businesses.</p>
-        </div>
-    </div>
-
+<!-- page-title -->
+<div class="ttm-page-title-row" style="background-image:url(assets/images/slides/about-slide.jpg)">
     <div class="container">
-        <div class="company-icons-wrapper" id="companyIcons">
-            <button class="slider-btn left-btn" onclick="scrollIcons(-1)">&#8249;</button>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-box ttm-textcolor-white">
+                    <div class="page-title-heading">
+                        <h1 class="title">About Us</h1>
+                    </div><!-- /.page-title-captions -->
+                    <div class="breadcrumb-wrapper">
+                        <span>
+                            <a title="Homepage" href="index.php"><i class="ti ti-home"></i>&nbsp;&nbsp;Home</a>
+                        </span>
+                        <span class="ttm-bread-sep">&nbsp; | &nbsp;</span>
+                        <span>About Us</span>
+                    </div>
+                </div>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div><!-- page-title end-->
 
-            <div class="carousel-container">
-                <div class="company-icons" id="iconsCarousel">
-                    <img src="assets/images/Ecoserv-Logo.webp" class="company-icon" onclick="filterProjects('USA')" alt="USA">
-                    <img src="assets/images/Aus.jpg" class="company-icon" onclick="filterProjects('Australia')" alt="Australia">
-                    <img src="assets/images/pointon.png" class="company-icon" onclick="filterProjects('Norway')" alt="Norway">
+<!--site-main start-->
+<div class="site-main">
+
+<!-- about-section -->
+<section class="ttm-row about-top-section clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12">
+                <div class="position-relative pr-15 res-991-pr-0">
+                    <div class="row mb-30">
+                        <div class="col-sm-7">
+                            <!-- ttm_single_image-wrapper -->
+                            <div class="ttm_single_image-wrapper ttm-991-center">
+                                <img class="img-fluid" src="assets/images/about1.jpg" title="single-img-three" alt="single-img-three">
+                            </div><!-- ttm_single_image-wrapper end -->
+                        </div>
+                        <div class="col-sm-5">
+                            <!-- ttm_single_image-wrapper -->
+                            <div class="ttm_single_image-wrapper ttm-991-center res-575-mt-30">
+                                <img class="img-fluid" src="assets/images/about2.jpg" title="single-img-four" alt="single-img-four" style="height:310px;">
+                            </div><!-- ttm_single_image-wrapper end -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="position-relative">
+                                <!-- ttm_single_image-wrapper -->
+                                <div class="ttm_single_image-wrapper w100">
+                                    <img class="img-fluid" src="assets/images/about3.jpg" title="single-img-five" alt="single-img-five">
+                                </div><!-- ttm_single_image-wrapper end -->
+                                <!--ttm-fid-->
+                                <div class="ttm-fid inside ttm-fid-view-lefticon ttm-highlight-fid-style2">
+                                    <div class="ttm-fid-left">
+                                        <div class="ttm-fid-icon-wrapper">
+                                            <i class="ti ti-world"></i>
+                                        </div>
+                                    </div>
+                                    <div class="ttm-fid-contents text-left">
+                                        <h4 class="ttm-fid-inner">
+                                            <span   data-appear-animation = "animateDigits"
+                                            data-from             = "0"
+                                            data-to               = "25"
+                                            data-interval         = "5"
+                                            data-before           = ""
+                                            data-before-style     = "sup"
+                                            data-after            = "+"
+                                            data-after-style      = "sub"
+                                        >25</span>
+                                        </h4>
+                                        <h3 class="ttm-fid-title">Years Of Experience</h3>
+                                    </div>
+                                </div><!-- ttm-fid end-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <button class="slider-btn right-btn" onclick="scrollIcons(1)">&#8250;</button>
-        </div>
-
-        <div class="show-all-container">
-            <button class="achievement-btn" id="showAllBtn" onclick="filterProjects('all')" style="display: none;">
-                Show All
-            </button>
+            <div class="col-lg-6 col-sm-12">
+                <div class="pl-15 res-991-pl-0 res-991-mt-30">
+                    <!-- section title -->
+                    <div class="section-title pr-60 res-991-pr-0 clearfix">
+                        <div class="title-header">
+                            <h5>ABOUT CONSULTANCY</h5>
+                            <h2 class="title">We work with you to address your most critical business priorities</h2>
+                        </div>
+                        <div class="title-desc">Knish Technologies is a Software Engineering Services company headed in Norway. Knish Technologies has been carved out of CIStems to focus on software product engineering services. In India, Knish Technologies is headed in Mumbai and has invested heavily in creating a powerful mix of human and infrastructural resources for offshore and onsite development and is positioned strategically for delivering world class solutions and services to its clients globally. We provide software solutions and enterprise applications for a wide spectrum of domains including supply chain, manufacturing performance, asset visibility, business continuity planning, healthcare, and finance. These applications have been developed on a variety of renowned platforms.
+</div>
+                    </div><!-- section title end -->
+                    <div class="row no-gutters mt-40 mb-27">
+                        <div class="col-md-6 col-lg-6 col-sm-6">
+                            <ul class="ttm-list ttm-list-style-icon">
+                                <li><i class="fa fa-arrow-circle-right ttm-textcolor-skincolor"></i><span class="ttm-list-li-content">Acquire live chat enables sales </span></li>
+                                <li><i class="fa fa-arrow-circle-right ttm-textcolor-skincolor"></i><span class="ttm-list-li-content">Engage - marketing automation</span></li>
+                                <li><i class="fa fa-arrow-circle-right ttm-textcolor-skincolor"></i><span class="ttm-list-li-content">Acquire live chat enables sales</span></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-6">
+                            <ul class="ttm-list ttm-list-style-icon">
+                                <li><i class="fa fa-arrow-circle-right ttm-textcolor-skincolor"></i><span class="ttm-list-li-content">Learn from customer feedback</span></li>
+                                <li><i class="fa fa-arrow-circle-right ttm-textcolor-skincolor"></i><span class="ttm-list-li-content">Support -customer support </span></li>
+                                <li><i class="fa fa-arrow-circle-right ttm-textcolor-skincolor"></i><span class="ttm-list-li-content">Learn from customer feedback</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="separator">
+                        <div class="sep-line dashed"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</section>
+<!-- about-section end -->
 
-    <div class="projects" id="projectList">
-        <div class="project-item" data-company="USA">
-            <div class="project-content">
-                <div class="project-title">
-                    <b>USA Oil and Gas Integration</b>
-                    <img src="assets/images/NationalFlag/USA.jpg" class="project-icon" alt="USA Icon">
-                </div>
-                <div class="date">Date: May 15, 2023</div>
-                <br>
-				 <div class="image-container">
-                        <img src="<?=base_url()?>assets/images/logic1.png" width="350" height="450" style="margin-right: 30px;">
-                        <img src="<?=base_url()?>assets/images/logic.png" width="350" height="450" style="margin-right: 30px;">
-                        <img src="<?=base_url()?>assets/images/logic2.png" width="350" height="450">
+<!-- services-section -->
+<section class="ttm-row ttm-bgcolor-darkgrey ttm-bg ttm-bgimage-yes bg-img1 about-services-section clearfix">
+    <div class="ttm-row-wrapper-bg-layer ttm-bg-layer"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-2 col-sm-1"></div>
+            <div class="col-lg-6 col-md-8 col-sm-10">
+                <!-- section title -->
+                <div class="section-title text-center with-desc clearfix">
+                    <div class="title-header mb-60">
+                        <h5>WHY CHOOSE US</h5>
+                        <h2 class="title">We creating solutions for your organization</h2>
                     </div>
-                    <br>
-                <p>We are thrilled to announce the successful completion of the <b>USA Oil & Gas Integration Project</b>, delivering a robust and scalable solution tailored for the oil & gas industry in the USA. Our team leveraged cutting-edge cloud technologies to streamline operations and enhance efficiency.</p>
-                <p><b>🔹 Key Technologies That Powered This Project:</b></p>
-                <ul>
-                    <li>- <b>Azure Logic Apps</b> for seamless workflow automation and integration</li>
-                    <li>- <b>Azure Functions</b> for serverless compute operations</li>
-                    <li>- <b>Azure SQL Server</b> for robust data storage and management</li>
-                    <li>- <b>Azure Key Vault</b> for secure management of secrets and credentials</li>
-                    <li>- <b>Azure Storage Account (ADLS)</b> for optimized data storage solutions</li>
-                    <li>- <b>RosettaNet</b> for B2B messaging and integration</li>
-                    <li>- <b>XML, XSLT, and XSD</b> for transforming, validating, and mapping data</li>
-                </ul>
-				<br>
-                <p>This solution is designed to <b>streamline operations, boost productivity, and provide agility</b> needed for the USA’s oil & gas sector to thrive in today’s fast-paced digital landscape. 🌍💡</p>
-                <p>We’re incredibly proud of our <b>team’s innovation-driven approach</b>. Looking forward to more projects that redefine possibilities with Azure! 🔗</p>
+                </div><!-- section title end -->
             </div>
+            <div class="col-lg-3 col-md-2 col-sm-1"></div>
         </div>
-        <div class="project-item" data-company="Australia">
-            <div class="project-content">
-                <div class="project-title">
-                    <b>Migration Project</b>
-                    <img src="assets/images/NationalFlag/Aus.jpg" class="project-icon" alt="Australia Icon">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row align-items-center ptb-50 res-991-ptb-20 iconalign-before-heading-row">
+                    <div class="col-md-4">
+                        <!-- featured-icon-box -->
+                        <div class="featured-icon-box iconalign-before-heading style1">
+                            <div class="featured-content"><!-- featured-content -->
+                                <div class="ttm-icon ttm-icon_element-color-skincolor ttm-icon_element-size-lg">
+                                    <!-- <i class="ti ti-world"></i> -->
+                                    <div id="elm-cons" class="bi-red"></div>
+                                </div>
+                                <div class="featured-title">
+                                    <h5 class="mb-0" style="color:#fff !important; text-transform: uppercase;">Business Intelligence Solutions &amp; Big Data Analytics</h5>
+                                </div>
+                            </div><!-- featured-content -->
+                        </div><!-- featured-icon-box -->
+                    </div>
+                    <div class="col-md-8">
+                        <p class="mb-0 ml-30 res-767-mt-20 res-767-ml-10">Devise and implement business strategies that drive success—for an entire business or division, technology, or asset.</p>
+                    </div>
                 </div>
-                <div class="date">Date: July 10, 2024</div>
-                <br>
-				<div class="image-container">
-					<img src="<?=base_url()?>assets/images/fabric1.png" width="550" height="300">
-					<img src="<?=base_url()?>assets/images/fabric2.png" width="550" height="300">
-					<img src="<?=base_url()?>assets/images/fabric3.png" width="550" height="300" 
-						style="display: block; margin: 0 auto;">
-				</div>
-                    <br>
-                <p>We are excited to announce the successful completion of our <b>Migration Project</b> for an Australian-based company, enabling a seamless transition to a modern cloud-based infrastructure with enhanced scalability, performance, and efficiency. This project harnessed the power of <b>Microsoft Fabric</b> alongside cutting-edge technologies to optimize data migration, integration, and analytics workflows.</p>
-                <p><b>🔹 Key Highlights of the Project:</b></p>
-                <ul>
-                    <li>- <b>Microsoft Fabric</b> for unified data integration, transformation, governance, and security</li>
-                    <li>- <b>Lakehouse Architecture</b> to enable scalable and structured data storage</li>
-                    <li>- <b>Spark Clusters</b> for high-performance big data processing and analytics</li>
-                    <li>- <b>Data Factory in Fabric</b> for orchestrating seamless ETL pipelines</li>
-                    <li>- <b>Power BI</b> for real-time data visualization, analytics, and business intelligence</li>
-                    <li>- <b>Power Apps</b> for workflow automation and seamless data integration into SSMS</li>
-                    <li>- <b>SQL Server Management Studio (SSMS)</b> for efficient data management and querying</li>
-                    <li>- <b>End-to-End Data Migration</b> to a modern, future-ready cloud-based infrastructure</li>
-                </ul>
-				<br>
-                <p>This project has significantly enhanced <b>data processing, reporting capabilities, and analytics workflows</b>, empowering the company with deeper insights and agile decision-making. 🎯</p>
-                <p>Kudos to our <b>dedicated team</b> for their commitment to innovation! Looking forward to more groundbreaking cloud transformation projects. 🌐💡</p>
+                <div class="row align-items-center ptb-50 res-991-ptb-20 iconalign-before-heading-row">
+                    <div class="col-md-4">
+                        <!-- featured-icon-box -->
+                        <div class="featured-icon-box iconalign-before-heading style1">
+                            <div class="featured-content"><!-- featured-content -->
+                                <div class="ttm-icon ttm-icon_element-color-skincolor ttm-icon_element-size-lg">
+                                    <!-- <i class="ti ti-bar-chart"></i> -->
+                                    <div id="elm-cons" class="in-red"></div>
+                                </div>
+                                <div class="featured-title">
+                                    <h5 class="mb-0" style="color:#fff !important; text-transform:uppercase;">Integration Services &amp; API Services</h5>
+                                </div>
+                            </div><!-- featured-content -->
+                        </div><!-- featured-icon-box -->
+                    </div>
+                    <div class="col-md-8">
+                        <p class="mb-0 ml-30 res-767-mt-20 res-767-ml-10">By balancing and optimizing the many competing assets and initiatives achieve deep & lasting improvements.</p>
+                    </div>
+                </div>
+                <div class="row align-items-center ptb-50 res-991-ptb-20 iconalign-before-heading-row">
+                    <div class="col-md-4">
+                        <!-- featured-icon-box -->
+                        <div class="featured-icon-box iconalign-before-heading style1">
+                            <div class="featured-content"><!-- featured-content -->
+                                <div class="ttm-icon ttm-icon_element-color-skincolor ttm-icon_element-size-lg">
+                                    <!-- <i class="ti ti-zip"></i> -->
+                                    <div id="elm-cons" class="cloud-red"></div>
+                                </div>
+                                <div class="featured-title">
+                                    <h5 class="mb-0" style="color:#fff !important; text-transform: uppercase;">Cloud Computing &amp; IOT EDGE Services</h5>
+                                </div>
+                            </div><!-- featured-content -->
+                        </div><!-- featured-icon-box -->
+                    </div>
+                    <div class="col-md-8">
+                        <p class="mb-0 ml-30 res-767-mt-20 res-767-ml-10">Organizations are designed to be effective and an efficient. The processes require cross-functional teaming.</p>
+                    </div>
+                </div>
+                <div class="row align-items-center ptb-50 res-991-ptb-20 iconalign-before-heading-row">
+                    <div class="col-md-4">
+                        <!-- featured-icon-box -->
+                        <div class="featured-icon-box iconalign-before-heading style1">
+                            <div class="featured-content"><!-- featured-content -->
+                                <div class="ttm-icon ttm-icon_element-color-skincolor ttm-icon_element-size-lg">
+                                    <!-- <i class="ti ti-zip"></i> -->
+                                    <div id="elm-cons" class="ai-red"></div>
+                                </div>
+                                <div class="featured-title">
+                                    <h5 class="mb-0" style="color:#fff !important; text-transform: uppercase;">AI &amp; Cognitive Services <br>  Machine Learning</h5>
+                                </div>
+                            </div><!-- featured-content -->
+                        </div><!-- featured-icon-box -->
+                    </div>
+                    <div class="col-md-8">
+                        <p class="mb-0 ml-30 res-767-mt-20 res-767-ml-10">Our decision risk analytics empower clients to develop rational decision-making models and development.</p>
+                    </div>
+                </div>
+                <div class="row align-items-center ptb-50 res-991-ptb-20 iconalign-before-heading-row">
+                    <div class="col-md-4">
+                        <!-- featured-icon-box -->
+                        <div class="featured-icon-box iconalign-before-heading style1">
+                            <div class="featured-content"><!-- featured-content -->
+                                <div class="ttm-icon ttm-icon_element-color-skincolor ttm-icon_element-size-lg">
+                                    <!-- <i class="ti ti-zip"></i> -->
+                                    <div id="elm-cons" class="web-red"></div>
+                                </div>
+                                <div class="featured-title">
+                                    <h5 class="mb-0" style="color:#fff !important; text-transform: uppercase;">Web Applications &amp; Ecommerce Solutions<br> Mobile App Development</h5>
+                                </div>
+                            </div><!-- featured-content -->
+                        </div><!-- featured-icon-box -->
+                    </div>
+                    <div class="col-md-8">
+                        <p class="mb-0 ml-30 res-767-mt-20 res-767-ml-10">The venues where savings and investments are channeled between the suppliers who have capital and those.</p>
+                    </div>
+                </div>
+                <div class="row align-items-center ptb-50 res-991-ptb-20 iconalign-before-heading-row">
+                    <div class="col-md-4">
+                        <!-- featured-icon-box -->
+                        <div class="featured-icon-box iconalign-before-heading style1">
+                            <div class="featured-content"><!-- featured-content -->
+                                <div class="ttm-icon ttm-icon_element-color-skincolor ttm-icon_element-size-lg">
+                                    <!-- <i class="ti ti-zip"></i> -->
+                                    <div id="elm-cons" class="cons-red"></div>
+                                </div>
+                                <div class="featured-title">
+                                    <h5 class="mb-0" style="color:#fff !important; text-transform: uppercase;">Operational &amp; IT Consulting Services</h5>
+                                </div>
+                            </div><!-- featured-content -->
+                        </div><!-- featured-icon-box -->
+                    </div>
+                    <div class="col-md-8">
+                        <p class="mb-0 ml-30 res-767-mt-20 res-767-ml-10">Redefine your workplace value equation that encourage staff to work more attentively and gracefully.</p>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
+</section>
+<!-- services-section end -->
 
-        <div class="project-item" data-company="Norway">
-            <div class="project-content">
-                <div class="project-title">
-                    <b>API Integration</b>
-                    <img src="assets/images/NationalFlag/Norway.jpg" class="project-icon" alt="Norway Icon">
+<!-- client-section -->
+<section class="ttm-row team-work-section bg-img4 clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-2"></div>
+            <div class="col-md-6 col-sm-8">
+                <!-- section title -->
+                <div class="section-title text-center with-desc clearfix">
+                    <div class="title-header mb-60">
+                        <h5>how it works</h5>
+                        <h2 class="title">Three Simple Step To Start Working Process</h2>
+                    </div>
+                </div><!-- section title end -->
+            </div>
+            <div class="col-md-3 col-sm-2"></div>
+        </div>
+        <div class="row no-gutters mt-23 ttm-fid-view-topicon-row ttm-bgcolor-white">
+            <div class="col-md-3 col-sm-6 with-right-border">
+                <div class="ttm-fid inside ttm-fid-view-topicon">
+                    <div class="ttm-fid-icon-wrapper"><i class="ti ti-light-bulb"></i></div>
+                    <div class="ttm-fid-contents">
+                        <h4><span   data-appear-animation = "animateDigits"
+                                    data-from             = "0"
+                                    data-to               = "273"
+                                    data-interval         = "20"
+                                    data-before           = ""
+                                    data-before-style     = "sup"
+                                    data-after            = ""
+                                    data-after-style      = "sub"
+                                >273
+                            </span>
+                        </h4>
+                        <h3 class="ttm-fid-title"><span>Experts In Specific Field Of Research</span></h3>
+                    </div><!-- ttm-fid-contents end -->
                 </div>
-                <div class="date">Date: Feb 20, 2025</div>
-                <p>We are excited to announce the successful completion of our <b>API Integration Project</b> for a leading Norwegian company! This project seamlessly connected two businesses with a robust, scalable .NET-based solution powered by Azure. </p>
-                <p><b>Project Highlights:</b></p>
-                <ul>
-                    <li>- <b>Scalable API Integration</b> built using <b>.NET and C#</b></li>
-                    <li>- <b>Azure API Management</b> for secure and efficient API communication</li>
-                    <li>- <b>Azure Function Apps</b> for real-time serverless computing</li>
-                    <li>- <b>Advanced security measures</b> for authentication and authorization</li>
-                </ul>
-				<br>
-                <p>This integration <b>automates workflows, reduces manual effort, and enhances business efficiency</b>, ensuring seamless and reliable data exchange between both companies. </p>
-                <p>A huge shout-out to our <b>incredible team</b> for their expertise and dedication in making this project a success! We look forward to more innovation-driven collaborations in the API integration space. 🌍💡</p>
+            </div>
+            <div class="col-md-3 col-sm-6 with-right-border">
+                <div class="ttm-fid inside ttm-fid-view-topicon">
+                    <div class="ttm-fid-icon-wrapper"><i class="ti ti-world"></i></div>
+                    <div class="ttm-fid-contents">
+                        <h4><span   data-appear-animation = "animateDigits"
+                                    data-from             = "0"
+                                    data-to               = "145"
+                                    data-interval         = "20"
+                                    data-before           = ""
+                                    data-before-style     = "sup"
+                                    data-after            = ""
+                                    data-after-style      = "sub"
+                                >145
+                            </span>
+                        </h4>
+                        <h3 class="ttm-fid-title"><span>Established Branches Globally</span></h3>
+                    </div><!-- ttm-fid-contents end -->
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 with-right-border">
+                <div class="ttm-fid inside ttm-fid-view-topicon">
+                    <div class="ttm-fid-icon-wrapper"><i class="ti ti-pencil-alt"></i></div>
+                    <div class="ttm-fid-contents">
+                        <h4><span   data-appear-animation = "animateDigits"
+                                    data-from             = "0"
+                                    data-to               = "891"
+                                    data-interval         = "20"
+                                    data-before           = ""
+                                    data-before-style     = "sup"
+                                    data-after            = ""
+                                    data-after-style      = "sub"
+                                >891
+                            </span>
+                        </h4>
+                        <h3 class="ttm-fid-title"><span>Projects Have Done Successfully</span></h3>
+                    </div><!-- ttm-fid-contents end -->
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 with-right-border">
+                <div class="ttm-fid inside ttm-fid-view-topicon">
+                    <div class="ttm-fid-icon-wrapper"><i class="ti ti-user"></i></div>
+                    <div class="ttm-fid-contents">
+                        <h4><span   data-appear-animation = "animateDigits"
+                                    data-from             = "0"
+                                    data-to               = "547"
+                                    data-interval         = "20"
+                                    data-before           = ""
+                                    data-before-style     = "sup"
+                                    data-after            = ""
+                                    data-after-style      = "sub"
+                                >547
+                            </span>
+                        </h4>
+                        <h3 class="ttm-fid-title"><span>Satisfied Clients From Corporate World</span></h3>
+                    </div><!-- ttm-fid-contents end -->
+                </div>
             </div>
         </div>
+    </div>
+</section>
 <!-- client-section end-->
 
 </div><!--site-main end-->
-
-<script>
-    let currentIndex = 0;
-    const itemsPerSlide = 6;
-    const iconsCarousel = document.getElementById("iconsCarousel");
-    const totalItems = iconsCarousel.children.length;
-
-    function scrollIcons(direction) {
-        let maxIndex = Math.ceil(totalItems / itemsPerSlide) - 1;
-        currentIndex = Math.max(0, Math.min(currentIndex + direction, maxIndex));
-        iconsCarousel.style.transform = `translateX(-${currentIndex * 550}px)`;
-    }
-
-    function filterProjects(company) {
-        let projects = document.querySelectorAll(".project-item");
-        let showAllBtn = document.getElementById("showAllBtn");
-
-        if (company === "all") {
-            projects.forEach(item => item.style.display = "flex");
-            showAllBtn.style.display = "none"; // Hide 'Show All' button
-        } else {
-            projects.forEach(item => {
-                if (item.getAttribute("data-company") === company) {
-                    item.style.display = "flex";
-                } else {
-                    item.style.display = "none";
-                }
-            });
-            showAllBtn.style.display = "inline-block"; // Show 'Show All' button
-        }
-    }
-
-    function sortProjectsByDate() {
-        const projectList = document.getElementById("projectList");
-        const projects = Array.from(projectList.querySelectorAll(".project-item"));
-
-        projects.sort((a, b) => {
-            const dateA = new Date(a.querySelector(".date").textContent.replace("Date: ", "").trim());
-            const dateB = new Date(b.querySelector(".date").textContent.replace("Date: ", "").trim());
-            return dateB - dateA; // Sort in descending order
-        });
-
-        // Clear and re-append sorted projects
-        projectList.innerHTML = "";
-        projects.forEach(project => projectList.appendChild(project));
-    }
-
-    // Call sorting function when page loads
-    document.addEventListener("DOMContentLoaded", sortProjectsByDate);
-</script>
-
 <!--footer start-->
 <footer class="footer widget-footer clearfix">
 <div class="first-footer">
@@ -1170,5 +1055,5 @@ $( ".it-cons-div" ).mouseout(function()
 
 </body>
 
-<!-- Mirrored from www.knishtech.com/blog by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Feb 2025 11:39:11 GMT -->
+<!-- Mirrored from www.knishtech.com/about-us by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 25 Feb 2025 11:38:07 GMT -->
 </html>
